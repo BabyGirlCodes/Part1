@@ -83,6 +83,35 @@ public class DynamicArrayList {
         size++;
         return true;
     }
+    public boolean removeAll(String value){
+        if (value == null){
+            throw new IllegalArgumentException("value put in the array cannot be null");
+        }
+        int count= 0;
+        int newSize = size;
+        String [] newArray = new String[data.length];
+        for (int i = 0; i < size; i++) {
+            if (!data[i].equals(value)){
+                newArray[i] = data[i];
+                count++;
+            }
+        }
+        size = count;
+        return size!= newSize;
+
+    }
+    public int lastIndexOf (String value){
+        if (value == null){
+            throw  new IllegalArgumentException("Value to be searched cannot be null");
+
+        }
+        for (int i = size -1; i >= 0 ; i--) {
+           if (data[i]!= null && data[i].equals(value)){
+               return i;
+           }
+        }
+        return -1;
+    }
 
 }
 
