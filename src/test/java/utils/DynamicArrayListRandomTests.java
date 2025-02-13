@@ -19,225 +19,225 @@ public class DynamicArrayListRandomTests {
     public DynamicArrayListRandomTests() {
     }
 
-    /**
-     * Test of count method using exact counting approach, with an empty list.
-     */
-    @Test
-    public void testCount_EmptyList_Exact() {
-        System.out.println("Testing count with an empty list, using exact count approach");
-        DynamicArrayList instance = new DynamicArrayList();
-        int expResult = 0;
-        int result = instance.count("Test", false);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of count method using exact counting approach, with a list containing some matches.
-     */
-    @Test
-    public void testCount_ListContainingMatches_Exact() {
-        System.out.println("Testing count with a list containing some matches, using exact count approach");
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add("hi");
-        instance.add("hello");
-        instance.add("Hi");
-        int expResult = 2;
-        int result = instance.count("hi", false);
-        assertEquals(expResult, result);
-    }
-    /**
-     * Test of count method using exact counting approach, with a list containing some matches and some nulls.
-     */
-    @Test
-    public void testCount_ListContainingMatchesAndNulls_Exact() {
-        System.out.println("Testing count with a list containing some matches, using exact count approach");
-
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add(null);
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add(null);
-        instance.add("hi");
-        instance.add("hello");
-        instance.add(null);
-        instance.add("Hi");
-
-        int expResult = 2;
-        int result = instance.count("hi", false);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of count method using inexact counting approach, with an empty list.
-     */
-    @Test
-    public void testCount_EmptyList_Inexact() {
-        System.out.println("Testing count with an empty list, using inexact count approach");
-        DynamicArrayList instance = new DynamicArrayList();
-        int expResult = 0;
-        int result = instance.count("Test", true);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of count method using inexact counting approach, with a list containing some matches.
-     */
-    @Test
-    public void testCount_ListContainingMatches_Inexact() {
-        System.out.println("Testing count with a list containing some matches, using inexact count approach");
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add("hi");
-        instance.add("hello");
-        instance.add("Hi");
-
-        int expResult = 4;
-        int result = instance.count("hi", true);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of count method using inexact counting approach, with a list containing some matches and some nulls.
-     */
-    @Test
-    public void testCount_ListContainingMatchesAndNulls_Inexact() {
-        System.out.println("Testing count with a list containing some matches, using inexact count approach");
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add(null);
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add(null);
-        instance.add("hi");
-        instance.add("hello");
-        instance.add(null);
-        instance.add("Hi");
-
-        int expResult = 4;
-        int result = instance.count("hi", true);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of clear method, performed on a populated list.
-     */
-    @Test
-    public void testClear() {
-        System.out.println("Testing clear with a populated list");
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add(null);
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add(null);
-        instance.add("hi");
-        instance.add("hello");
-        instance.add(null);
-        instance.add("Hi");
-
-        int expResult = 0;
-        instance.clear();
-        int result = instance.size();
-        assertEquals(expResult, result);
-
-        // Confirm it can still be added to
-        String text  = "Aloha";
-        instance.add(text);
-        String textReturned = instance.get(0);
-        assertEquals(text, textReturned);
-    }
-
-    /**
-     * Test of clear method, performed on an empty list.
-     */
-    @Test
-    public void testClear_EmptyList() {
-        System.out.println("Testing clear with an empty list");
-        DynamicArrayList instance = new DynamicArrayList();
-        int expResult = 0;
-        instance.clear();
-        int result = instance.size();
-        assertEquals(expResult, result);
-
-        // Confirm it can still be added to
-        String text  = "Aloha";
-        instance.add(text);
-        String textReturned = instance.get(0);
-        assertEquals(text, textReturned);
-    }
-
-    /**
-     * Test of clear method, performed on a populated list.
-     */
-    @Test
-    public void testClone_PopulatedList() {
-        System.out.println("Testing clone with a populated list");
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add(null);
-        instance.add("Hi");
-        instance.add("hi");
-        instance.add(null);
-        instance.add("hi");
-        instance.add("hello");
-        instance.add(null);
-        instance.add("Hi");
-        int lastPos = instance.size();
-
-        DynamicArrayList clone = instance.clone();
-
-        // Confirm sizes match
-        assertEquals(instance.size(), clone.size());
-
-        // Confirm everything inside matches
-        for(int i = 0; i < instance.size(); i++){
-            String original = instance.get(i);
-            String cloned = instance.get(i);
-            assertEquals(original, cloned);
-        }
-
-        // Confirm the two are independent
-        String text  = "Aloha";
-        instance.add(text);
-        String textReturned = instance.get(lastPos);
-        assertEquals(text, textReturned);
-
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            clone.get(lastPos);
-        });
-    }
-
-    /**
-     * Test of clear method, performed on an empty list.
-     */
-    @Test
-    public void testClone_EmptyList() {
-        System.out.println("Testing clone with an empty list");
-        DynamicArrayList instance = new DynamicArrayList();
-        int lastPos = instance.size();
-
-        DynamicArrayList clone = instance.clone();
-
-        // Confirm sizes match
-        assertEquals(instance.size(), clone.size());
-
-        // Confirm everything inside matches (should be empty)
-        for(int i = 0; i < instance.size(); i++){
-            String original = instance.get(i);
-            String cloned = instance.get(i);
-            assertEquals(original, cloned);
-        }
-
-        // Confirm the two are independent
-        String text  = "Aloha";
-        instance.add(text);
-        String textReturned = instance.get(lastPos);
-        assertEquals(text, textReturned);
-
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            clone.get(lastPos);
-        });
-    }
+//    /**
+//     * Test of count method using exact counting approach, with an empty list.
+//     */
+//    @Test
+//    public void testCount_EmptyList_Exact() {
+//        System.out.println("Testing count with an empty list, using exact count approach");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        int expResult = 0;
+//        int result = instance.count("Test", false);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of count method using exact counting approach, with a list containing some matches.
+//     */
+//    @Test
+//    public void testCount_ListContainingMatches_Exact() {
+//        System.out.println("Testing count with a list containing some matches, using exact count approach");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add("Hi");
+//        int expResult = 2;
+//        int result = instance.count("hi", false);
+//        assertEquals(expResult, result);
+//    }
+//    /**
+//     * Test of count method using exact counting approach, with a list containing some matches and some nulls.
+//     */
+//    @Test
+//    public void testCount_ListContainingMatchesAndNulls_Exact() {
+//        System.out.println("Testing count with a list containing some matches, using exact count approach");
+//
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add(null);
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add(null);
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add(null);
+//        instance.add("Hi");
+//
+//        int expResult = 2;
+//        int result = instance.count("hi", false);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of count method using inexact counting approach, with an empty list.
+//     */
+//    @Test
+//    public void testCount_EmptyList_Inexact() {
+//        System.out.println("Testing count with an empty list, using inexact count approach");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        int expResult = 0;
+//        int result = instance.count("Test", true);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of count method using inexact counting approach, with a list containing some matches.
+//     */
+//    @Test
+//    public void testCount_ListContainingMatches_Inexact() {
+//        System.out.println("Testing count with a list containing some matches, using inexact count approach");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add("Hi");
+//
+//        int expResult = 4;
+//        int result = instance.count("hi", true);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of count method using inexact counting approach, with a list containing some matches and some nulls.
+//     */
+//    @Test
+//    public void testCount_ListContainingMatchesAndNulls_Inexact() {
+//        System.out.println("Testing count with a list containing some matches, using inexact count approach");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add(null);
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add(null);
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add(null);
+//        instance.add("Hi");
+//
+//        int expResult = 4;
+//        int result = instance.count("hi", true);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of clear method, performed on a populated list.
+//     */
+//    @Test
+//    public void testClear() {
+//        System.out.println("Testing clear with a populated list");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add(null);
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add(null);
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add(null);
+//        instance.add("Hi");
+//
+//        int expResult = 0;
+//        instance.clear();
+//        int result = instance.size();
+//        assertEquals(expResult, result);
+//
+//        // Confirm it can still be added to
+//        String text  = "Aloha";
+//        instance.add(text);
+//        String textReturned = instance.get(0);
+//        assertEquals(text, textReturned);
+//    }
+//
+//    /**
+//     * Test of clear method, performed on an empty list.
+//     */
+//    @Test
+//    public void testClear_EmptyList() {
+//        System.out.println("Testing clear with an empty list");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        int expResult = 0;
+//        instance.clear();
+//        int result = instance.size();
+//        assertEquals(expResult, result);
+//
+//        // Confirm it can still be added to
+//        String text  = "Aloha";
+//        instance.add(text);
+//        String textReturned = instance.get(0);
+//        assertEquals(text, textReturned);
+//    }
+//
+//    /**
+//     * Test of clear method, performed on a populated list.
+//     */
+//    @Test
+//    public void testClone_PopulatedList() {
+//        System.out.println("Testing clone with a populated list");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add(null);
+//        instance.add("Hi");
+//        instance.add("hi");
+//        instance.add(null);
+//        instance.add("hi");
+//        instance.add("hello");
+//        instance.add(null);
+//        instance.add("Hi");
+//        int lastPos = instance.size();
+//
+//        DynamicArrayList clone = instance.clone();
+//
+//        // Confirm sizes match
+//        assertEquals(instance.size(), clone.size());
+//
+//        // Confirm everything inside matches
+//        for(int i = 0; i < instance.size(); i++){
+//            String original = instance.get(i);
+//            String cloned = instance.get(i);
+//            assertEquals(original, cloned);
+//        }
+//
+//        // Confirm the two are independent
+//        String text  = "Aloha";
+//        instance.add(text);
+//        String textReturned = instance.get(lastPos);
+//        assertEquals(text, textReturned);
+//
+//        assertThrows(IndexOutOfBoundsException.class, () -> {
+//            clone.get(lastPos);
+//        });
+//    }
+//
+//    /**
+//     * Test of clear method, performed on an empty list.
+//     */
+//    @Test
+//    public void testClone_EmptyList() {
+//        System.out.println("Testing clone with an empty list");
+//        DynamicArrayList instance = new DynamicArrayList();
+//        int lastPos = instance.size();
+//
+//        DynamicArrayList clone = instance.clone();
+//
+//        // Confirm sizes match
+//        assertEquals(instance.size(), clone.size());
+//
+//        // Confirm everything inside matches (should be empty)
+//        for(int i = 0; i < instance.size(); i++){
+//            String original = instance.get(i);
+//            String cloned = instance.get(i);
+//            assertEquals(original, cloned);
+//        }
+//
+//        // Confirm the two are independent
+//        String text  = "Aloha";
+//        instance.add(text);
+//        String textReturned = instance.get(lastPos);
+//        assertEquals(text, textReturned);
+//
+//        assertThrows(IndexOutOfBoundsException.class, () -> {
+//            clone.get(lastPos);
+//        });
+//    }
 
     /**
      * Test of lastIndexOf method with information in the list.

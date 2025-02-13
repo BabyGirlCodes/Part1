@@ -12,11 +12,22 @@ public class DynamicArrayList {
     public DynamicArrayList(){
         this(10);
     }
+
     public DynamicArrayList(int startSize){
-        if(startSize <= 0){
+        if(startSize <= 0 ){
             throw new IllegalArgumentException("Internal array size cannot be less than 1");
         }
+
         data = new String[startSize];
+    }
+    public DynamicArrayList(String[] initialData) {
+        if (initialData == null) {
+            throw new IllegalArgumentException("Initial data cannot be null.");
+        }
+
+        data = new String[initialData.length];
+        size = initialData.length;
+        System.arraycopy(initialData, 0, data, 0, size); // Copy the data
     }
 
 
@@ -27,7 +38,7 @@ public class DynamicArrayList {
     public int size(){
         return size;
     }
-    public String set(String value, int pos){
+    public String set(int pos, String value){
         if (pos < 0 || pos >= size) {
             throw new IndexOutOfBoundsException("Position" + pos + " is out of bounds. Valid range: 0 to " + (size - 1));
         }
@@ -76,12 +87,30 @@ public class DynamicArrayList {
         data = newArray;
     }
     public boolean add(String value) {
+        if (data.length == 0){
+            throw new IllegalArgumentException("The list is empty");
+        }
         if (size == data.length){
             grow();
         }
         data[size] = value;
         size++;
         return true;
+    }
+    public void add(String value, int pos){
+        if (pos < 0 || pos >= data.length|| pos >= size){
+            throw new IndexOutOfBoundsException("Position is not within the bounds of specified size");
+        }
+
+        if (size == data.length){
+            grow();
+        }
+        for (int i = size; i > pos ; i--) {
+            data[i-1] = data[i];
+        }
+        data[pos] = value;
+        size++;
+
     }
     public boolean removeAll(String value){
         if (value == null){

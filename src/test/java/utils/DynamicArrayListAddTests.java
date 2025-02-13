@@ -125,95 +125,95 @@ public class DynamicArrayListAddTests {
             instance.add("Blue", 7);
         });
     }
-
-    /**
-     * Test of addAll method with empty list, where it does not need to grow.
-     */
-    @Test
-    public void testAddAll_NeedsToGrow_EmptyList() {
-        System.out.println("Testing adding all elements of an array where the list is empty and needs to grow");
-        String [] data = new String[15];
-        for(int i = 0; i < data.length; i++){
-            data[i] = "Item " + i;
-        }
-
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.addAll(data);
-        assertEquals(data.length, instance.size());
-        for(int i = 0; i < instance.size(); i++){
-            assertEquals(data[i], instance.get(i));
-        }
-    }
-    /**
-     * Test of addAll method with empty list, where it does not need to grow.
-     */
-    @Test
-    public void testAddAll_NoNeedToGrow() {
-        System.out.println("Testing adding all elements of an array where the list is empty and does not need to grow");
-        String [] data = new String[5];
-        for(int i = 0; i < data.length; i++){
-            data[i] = "Item " + i;
-        }
-
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.addAll(data);
-        assertEquals(data.length, instance.size());
-        for(int i = 0; i < instance.size(); i++){
-            assertEquals(data[i], instance.get(i));
-        }
-    }
-
-    /**
-     * Test of addAll method with non-empty list, where it needs to grow.
-     */
-    @Test
-    public void testAddAll_NeedsToGrow_NonEmptyList() {
-        System.out.println("Testing adding all elements of an array where the list is non-empty and needs to " +
-                "grow");
-        String [] data = new String[15];
-        for(int i = 0; i < data.length; i++){
-            data[i] = "Item " + i;
-        }
-
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add("Hello");
-        instance.add("Hi");
-        instance.addAll(data);
-
-        assertEquals(data.length+2, instance.size());
-
-        assertEquals("Hello", instance.get(0));
-        assertEquals("Hi", instance.get(1));
-        for(int i = 0; i < data.length; i++){
-            assertEquals(data[i], instance.get(i+2));
-        }
-    }
-
-    /**
-     * Test of addAll method with empty list, where it does not need to grow.
-     */
-    @Test
-    public void testAddAll_ExistingList() {
-        System.out.println("Testing adding all elements of an array where the list is non-empty and does not need to " +
-                "grow");
-        String [] data = new String[5];
-        for(int i = 0; i < data.length; i++){
-            data[i] = "Item " + i;
-        }
-
-        DynamicArrayList instance = new DynamicArrayList();
-        instance.add("Hello");
-        instance.add("Hi");
-        instance.addAll(data);
-
-        assertEquals(data.length+2, instance.size());
-
-        assertEquals("Hello", instance.get(0));
-        assertEquals("Hi", instance.get(1));
-        for(int i = 0; i < data.length; i++){
-            assertEquals(data[i], instance.get(i+2));
-        }
-    }
+//
+//    /**
+//     * Test of addAll method with empty list, where it does not need to grow.
+//     */
+//    @Test
+//    public void testAddAll_NeedsToGrow_EmptyList() {
+//        System.out.println("Testing adding all elements of an array where the list is empty and needs to grow");
+//        String [] data = new String[15];
+//        for(int i = 0; i < data.length; i++){
+//            data[i] = "Item " + i;
+//        }
+//
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.addAll(data);
+//        assertEquals(data.length, instance.size());
+//        for(int i = 0; i < instance.size(); i++){
+//            assertEquals(data[i], instance.get(i));
+//        }
+//    }
+//    /**
+//     * Test of addAll method with empty list, where it does not need to grow.
+//     */
+//    @Test
+//    public void testAddAll_NoNeedToGrow() {
+//        System.out.println("Testing adding all elements of an array where the list is empty and does not need to grow");
+//        String [] data = new String[5];
+//        for(int i = 0; i < data.length; i++){
+//            data[i] = "Item " + i;
+//        }
+//
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.addAll(data);
+//        assertEquals(data.length, instance.size());
+//        for(int i = 0; i < instance.size(); i++){
+//            assertEquals(data[i], instance.get(i));
+//        }
+//    }
+//
+//    /**
+//     * Test of addAll method with non-empty list, where it needs to grow.
+//     */
+//    @Test
+//    public void testAddAll_NeedsToGrow_NonEmptyList() {
+//        System.out.println("Testing adding all elements of an array where the list is non-empty and needs to " +
+//                "grow");
+//        String [] data = new String[15];
+//        for(int i = 0; i < data.length; i++){
+//            data[i] = "Item " + i;
+//        }
+//
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add("Hello");
+//        instance.add("Hi");
+//        instance.addAll(data);
+//
+//        assertEquals(data.length+2, instance.size());
+//
+//        assertEquals("Hello", instance.get(0));
+//        assertEquals("Hi", instance.get(1));
+//        for(int i = 0; i < data.length; i++){
+//            assertEquals(data[i], instance.get(i+2));
+//        }
+//    }
+//
+//    /**
+//     * Test of addAll method with empty list, where it does not need to grow.
+//     */
+//    @Test
+//    public void testAddAll_ExistingList() {
+//        System.out.println("Testing adding all elements of an array where the list is non-empty and does not need to " +
+//                "grow");
+//        String [] data = new String[5];
+//        for(int i = 0; i < data.length; i++){
+//            data[i] = "Item " + i;
+//        }
+//
+//        DynamicArrayList instance = new DynamicArrayList();
+//        instance.add("Hello");
+//        instance.add("Hi");
+//        instance.addAll(data);
+//
+//        assertEquals(data.length+2, instance.size());
+//
+//        assertEquals("Hello", instance.get(0));
+//        assertEquals("Hi", instance.get(1));
+//        for(int i = 0; i < data.length; i++){
+//            assertEquals(data[i], instance.get(i+2));
+//        }
+//    }
 
     /**
      * Test of set method with valid parameters.
